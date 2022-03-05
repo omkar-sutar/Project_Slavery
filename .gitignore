@@ -4,4 +4,3 @@
 /__pycache__/
 *.jpg
 *.mp4
-./chat_slave.py
