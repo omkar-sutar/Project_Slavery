@@ -13,7 +13,11 @@ class Master:
         self.functions=[self.message_to_slave,self.on_message_from_slave,self.send_file,self.execute_py,self.ping,self.chat]
         self.window=master_gui_widgets.window(self.on_input)
         self.mqtt_connected=False
+        self.window.root.protocol("WM_DELETE_WINDOW", self.on_window_close)
         self.connect_mqtt()
+    def on_window_close(self):
+        self.window.root.destroy()
+        exit()
     def connect_mqtt(self):
         try:
             self.master=mqtt.Client(client_id="Master")
@@ -105,7 +109,7 @@ class Master:
 if __name__ == '__main__':
     #Set up mqtt object. Handles all mqtt stuff. Also instantiates 'master_gui.window' internally.
     m=Master()
-    threading.Thread(target=m.mqtt_loop).start()
+    threading.Thread(target=m.mqtt_loop,daemon=True).start()
 
     m.window.show("Getting active slaves...\n")
     m.ping()
