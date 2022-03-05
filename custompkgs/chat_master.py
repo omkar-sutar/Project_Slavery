@@ -1,5 +1,4 @@
 import paho.mqtt.client as mqtt
-import threading
 
 def on_message(client,userdata,message):
     message=message.payload.decode()
