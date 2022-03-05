@@ -1,0 +1,6 @@
+*.txt
+!requirements.txt
+/myvenv/
+/__pycache__/
+*.jpg
+*.mp4
