@@ -46,7 +46,7 @@ Commands usage and results:
 
 2. chat(Slave 1)
 
-![master2](https://user-images.githubusercontent.com/78973793/156892704-8c0f948f-36d6-4db9-ac41-f6ac8f275de2.jpg)
+![master2](https://user-images.githubusercontent.com/78973793/156894772-4d701d58-5b2e-4881-b11a-e2c2cab3836b.jpg)
 
 The terminal on the left is running on master and one on the right is on slave.
 
