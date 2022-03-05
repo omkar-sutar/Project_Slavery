@@ -3,7 +3,7 @@ import threading
 
 def on_message(client,userdata,message):
     message=message.payload.decode()
-    print(message)
+    print("\n"+message)
 def mqtt_loop(client):
     client.loop_forever()
 
