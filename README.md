@@ -1,6 +1,7 @@
 # Project_Slavery
 A python project to control multiple PCs remotely (kinda virus)
 
+
 Communication is based on MQTT.
 
 ![master1](https://user-images.githubusercontent.com/78973793/156892629-92e0cf62-dd77-4ec5-aca4-ffb7c2b062a9.jpg)
