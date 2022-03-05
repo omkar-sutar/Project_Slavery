@@ -3,7 +3,7 @@ import os
 import ast
 import threading
 import subprocess
-import master_gui
+import master_gui_widgets
 import tkinter as tk
 import time
 
@@ -11,7 +11,7 @@ class Master:
     def __init__(self):
         self.messages_from_slaves=[]
         self.functions=[self.message_to_slave,self.on_message_from_slave,self.send_file,self.execute_py,self.ping,self.chat]
-        self.window=master_gui.window(self.on_input)
+        self.window=master_gui_widgets.window(self.on_input)
         self.mqtt_connected=False
         self.connect_mqtt()
     def connect_mqtt(self):
