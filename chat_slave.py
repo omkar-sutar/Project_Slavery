@@ -1,6 +1,4 @@
 import paho.mqtt.client as mqtt
-import threading
-import sys
 import os
 import signal
 

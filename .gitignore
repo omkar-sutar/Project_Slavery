@@ -4,3 +4,4 @@
 /__pycache__/
 *.jpg
 *.mp4
+./slave.py
