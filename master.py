@@ -102,19 +102,11 @@ class Master:
         self.master.loop_forever()
 
 
-#Set up mqtt object. Handles all mqtt stuff. Also instantiates 'master_gui.window' internally.
-m=Master()
+if __name__ == '__main__':
+    #Set up mqtt object. Handles all mqtt stuff. Also instantiates 'master_gui.window' internally.
+    m=Master()
+    threading.Thread(target=m.mqtt_loop).start()
 
-threading.Thread(target=m.mqtt_loop).start()
-#------------------------------------------------------
-#Code goes here
-
-m.window.show("Getting active slaves...\n")
-m.ping()
-
-
-
-#------------------------------------------------------
-m.window.root.mainloop()
-
-        
+    m.window.show("Getting active slaves...\n")
+    m.ping()
+    m.window.root.mainloop()
