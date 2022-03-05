@@ -31,7 +31,9 @@ All available commands:
 Refer docs for argument(s) information.
 
 send_file can send any file to the slave. The path where the file is to be saved is an argument.
+
 execute_py executes any python script on the slave provided the required packages are present.
+
 run_code runs the code supplied in text format as the argument on the slave(s) (Uses builtin eval() on slave(s)).
 
 Commands usage and results:
