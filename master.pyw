@@ -10,7 +10,7 @@ import time
 class Master:
     def __init__(self):
         self.messages_from_slaves=[]
-        self.functions=[self.message_to_slave,self.on_message_from_slave,self.send_file,self.execute_py,self.ping,self.chat]
+        self.functions=[self.message_to_slave,self.on_message_from_slave,self.send_file,self.execute_py,self.ping,self.chat,self.run_code]
         self.window=master_gui_widgets.window(self.on_input)
         self.mqtt_connected=False
         self.window.root.protocol("WM_DELETE_WINDOW", self.on_window_close)
@@ -23,7 +23,7 @@ class Master:
             self.master=mqtt.Client(client_id="Master")
             self.broker_address="broker.mqttdashboard.com"
             self.master.connect(self.broker_address)
-            self.master.subscribe(topic="from_slave",qos=0)
+            self.master.subscribe(topic="xINFINITYxfrom_slave",qos=0)
             self.master.on_message=self.on_message_from_slave
             self.window.show("MQTT connection established.\n")
             self.mqtt_connected=True
@@ -35,7 +35,7 @@ class Master:
     #Message to slave
     def message_to_slave(self,message_dict_str):
         """Dont use this function directly, other functions use this function behind the scenes."""
-        self.master.publish("from_master",qos=0,payload=message_dict_str)
+        self.master.publish("xINFINITYxfrom_master",qos=0,payload=message_dict_str)
 
     
     #On message from slave
@@ -70,17 +70,21 @@ class Master:
     #Execute python script on slave
 
     def execute_py(self,filename_on_master,filename_on_slave,slave_id='all'):
-        """Execute a python script on slave(s)"""
+        """Execute a python script on slave(s). The script is first downloaded on slave, executed and then deleted."""
         with open(filename_on_master,'rb') as fil:
             fil=fil.read()
             message={"to":slave_id,"action":"execute_py","filename":filename_on_slave,"data":fil}
             self.message_to_slave(str(message))
 
     def chat(self,slave_id='all'):
-        """Chat function. Master and slave(s) can chat."""
+        """Chat function. Master and slave(s) can chat. Enter "exit" to close chat."""
         self.execute_py("custompkgs/chat_slave.py","chat_slave.py",slave_id=slave_id)
         subprocess.call(f"python {os.path.join(os.getcwd(),'custompkgs','chat_master.py')}",creationflags=subprocess.CREATE_NEW_CONSOLE)
 
+    def run_code(self,code_text,slave_id='all'):
+        """Run the code present in code_text on the slave(s). The result if any will be returned by the corresponding slaves."""
+        message={"to":slave_id,"action":"run_code","code_text":code_text}
+        self.message_to_slave(str(message))
 
     def on_input(self,string):
         if len(string)<3 or '(' not in string or ')' not in string:
@@ -92,7 +96,7 @@ class Master:
             return
         for func in self.functions:
             if func.__name__==function_name:
-                function_args_str=str(string[string.index('(')+1:string.index(')')])
+                function_args_str=str(string[string.index('(')+1:string.rindex(')')])
                 function_args=function_args_str.rsplit(',')
                 if function_args[0]=='':
                     func()

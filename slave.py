@@ -1,3 +1,4 @@
+from lib2to3.pgen2.literals import evalString
 import paho.mqtt.client as mqtt
 import ast
 import os
@@ -11,7 +12,7 @@ slave=mqtt.Client(client_id=f"slave{slave_id}")
 broker_address="broker.mqttdashboard.com"
 slave.connect(broker_address)
 
-slave.subscribe(topic="from_master",qos=0)
+slave.subscribe(topic="xINFINITYxfrom_master",qos=0)
 
 #Messaging master
 
@@ -21,7 +22,7 @@ def message_to_master(message_dict):
     """
     message_dict["from"]=slave_id
     payload=str(message_dict)
-    slave.publish(topic="from_slave",qos=0,payload=payload)
+    slave.publish(topic="xINFINITYxfrom_slave",qos=0,payload=payload)
 
 
 #Saving file on slave
@@ -59,7 +60,15 @@ def on_message_from_master(client,userdata,message):
             threading.Thread(target=execute_py,args=(filename_on_slave,)).start()
             message_dict={"action":"text_message","data":f"File {filename_on_slave} execution thread started"}
             message_to_master(message_dict)
-        
+        if action=="run_code":
+            code_text=message["code_text"]
+            result=None
+            try:
+                result=eval(code_text)
+            except Exception as e:
+                result="Exception: "+str(e)
+            message_dict={"action":"text_message","data": f"Result: {str(result)}"}
+            message_to_master(message_dict)
 
 slave.on_message=on_message_from_master
 

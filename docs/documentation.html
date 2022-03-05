@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>master</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:e%3A%5Cpy%5Cpy%5Cproject_slavery%5Cmaster.py">e:\py\py\project_slavery\master.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:e%3A%5Cpy%5Cpy%5Cproject_slavery%5Cmaster.pyw">e:\py\py\project_slavery\master.pyw</a></font></td></tr></table>
     <p></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -18,7 +18,7 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="ast.html">ast</a><br>
-<a href="master_gui.html">master_gui</a><br>
+<a href="master_gui_widgets.html">master_gui_widgets</a><br>
 </td><td width="25%" valign=top><a href="paho.mqtt.client.html">paho.mqtt.client</a><br>
 <a href="os.html">os</a><br>
 </td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
@@ -50,11 +50,11 @@
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="Master-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
-<dl><dt><a name="Master-chat"><strong>chat</strong></a>(self, slave_id='all')</dt><dd><tt>Chat&nbsp;function.&nbsp;<a href="#Master">Master</a>&nbsp;and&nbsp;slave(s)&nbsp;can&nbsp;chat.</tt></dd></dl>
+<dl><dt><a name="Master-chat"><strong>chat</strong></a>(self, slave_id='all')</dt><dd><tt>Chat&nbsp;function.&nbsp;<a href="#Master">Master</a>&nbsp;and&nbsp;slave(s)&nbsp;can&nbsp;chat.&nbsp;Enter&nbsp;"exit"&nbsp;to&nbsp;close&nbsp;chat.</tt></dd></dl>
 
 <dl><dt><a name="Master-connect_mqtt"><strong>connect_mqtt</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="Master-execute_py"><strong>execute_py</strong></a>(self, filename_on_master, filename_on_slave, slave_id='all')</dt><dd><tt>Execute&nbsp;a&nbsp;python&nbsp;script&nbsp;on&nbsp;slave(s)</tt></dd></dl>
+<dl><dt><a name="Master-execute_py"><strong>execute_py</strong></a>(self, filename_on_master, filename_on_slave, slave_id='all')</dt><dd><tt>Execute&nbsp;a&nbsp;python&nbsp;script&nbsp;on&nbsp;slave(s).&nbsp;The&nbsp;script&nbsp;is&nbsp;first&nbsp;downloaded&nbsp;on&nbsp;slave,&nbsp;executed&nbsp;and&nbsp;then&nbsp;deleted.</tt></dd></dl>
 
 <dl><dt><a name="Master-message_to_slave"><strong>message_to_slave</strong></a>(self, message_dict_str)</dt><dd><tt>Dont&nbsp;use&nbsp;this&nbsp;function&nbsp;directly,&nbsp;other&nbsp;functions&nbsp;use&nbsp;this&nbsp;function&nbsp;behind&nbsp;the&nbsp;scenes.</tt></dd></dl>
 
@@ -64,9 +64,13 @@
 
 <dl><dt><a name="Master-on_message_from_slave"><strong>on_message_from_slave</strong></a>(self, client, userdata, message)</dt><dd><tt>#On&nbsp;message&nbsp;from&nbsp;slave</tt></dd></dl>
 
+<dl><dt><a name="Master-on_window_close"><strong>on_window_close</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="Master-ping"><strong>ping</strong></a>(self, slave_id='all')</dt><dd><tt>Call&nbsp;this&nbsp;function&nbsp;to&nbsp;get&nbsp;status&nbsp;of&nbsp;slaves&nbsp;i.e.&nbsp;whether&nbsp;they&nbsp;are&nbsp;online&nbsp;and&nbsp;listening.<br>
 &nbsp;<br>
 Arguments:&nbsp;slave_id:&nbsp;The&nbsp;id&nbsp;of&nbsp;the&nbsp;slave&nbsp;to&nbsp;ping.&nbsp;Defaults&nbsp;to&nbsp;'all'&nbsp;i.e.&nbsp;pings&nbsp;everyone.</tt></dd></dl>
+
+<dl><dt><a name="Master-run_code"><strong>run_code</strong></a>(self, code_text, slave_id='all')</dt><dd><tt>Run&nbsp;the&nbsp;code&nbsp;present&nbsp;in&nbsp;code_text&nbsp;on&nbsp;the&nbsp;slave(s).&nbsp;The&nbsp;result&nbsp;if&nbsp;any&nbsp;will&nbsp;be&nbsp;returned&nbsp;by&nbsp;the&nbsp;corresponding&nbsp;slaves.</tt></dd></dl>
 
 <dl><dt><a name="Master-send_file"><strong>send_file</strong></a>(self, filename_on_master, filename_on_slave, slave_id='all')</dt><dd><tt>Sends&nbsp;a&nbsp;file&nbsp;to&nbsp;the&nbsp;slave(s)</tt></dd></dl>
 
