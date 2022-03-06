@@ -13,8 +13,11 @@ It is expected to give unique ids to slaves (edit the variable in slave.py), tho
 
 To issue a command, type the name of the command followed by the arguments inside parenthesis.
 E.g. ping is a command which pings all online slaves. It can be used in following ways:
+
   ping(Slave id)    # "Slave id" is the id of the target slave.
+  
   ping(all)         #To ping all slaves
+  
   ping()            #Same as above. If no target slave is specified (all or Slave id) the default is all.
   
 The other commands can be used in same way. Refer function docs in documentation.html. The command format is function(args).
