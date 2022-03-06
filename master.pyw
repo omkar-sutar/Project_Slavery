@@ -23,7 +23,7 @@ class Master:
             self.master=mqtt.Client(client_id="Master")
             self.broker_address="broker.mqttdashboard.com"
             self.master.connect(self.broker_address)
-            self.master.subscribe(topic="xINFINITYxfrom_slave",qos=0)
+            self.master.subscribe(topic="from_slave",qos=0)
             self.master.on_message=self.on_message_from_slave
             self.window.show("MQTT connection established.\n")
             self.mqtt_connected=True
@@ -35,7 +35,7 @@ class Master:
     #Message to slave
     def message_to_slave(self,message_dict_str):
         """Dont use this function directly, other functions use this function behind the scenes."""
-        self.master.publish("xINFINITYxfrom_master",qos=0,payload=message_dict_str)
+        self.master.publish("from_master",qos=0,payload=message_dict_str)
 
     
     #On message from slave

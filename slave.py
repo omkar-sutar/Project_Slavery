@@ -12,7 +12,7 @@ slave=mqtt.Client(client_id=f"slave{slave_id}")
 broker_address="broker.mqttdashboard.com"
 slave.connect(broker_address)
 
-slave.subscribe(topic="xINFINITYxfrom_master",qos=0)
+slave.subscribe(topic="from_master",qos=0)
 
 #Messaging master
 
@@ -22,7 +22,7 @@ def message_to_master(message_dict):
     """
     message_dict["from"]=slave_id
     payload=str(message_dict)
-    slave.publish(topic="xINFINITYxfrom_slave",qos=0,payload=payload)
+    slave.publish(topic="from_slave",qos=0,payload=payload)
 
 
 #Saving file on slave
